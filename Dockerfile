@@ -16,7 +16,5 @@ RUN pip install gunicorn
 COPY . /code/
 WORKDIR /code/
 
-RUN python manage.py migrate
-
 EXPOSE 80
 CMD exec gunicorn lw.core.wsgi:application --bind 0.0.0.0:80 --workers 3

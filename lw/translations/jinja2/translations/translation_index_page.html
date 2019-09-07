@@ -4,7 +4,7 @@
   <ul>
     {% for node in page.children() recursive %}
     <li>
-      {{node.title}}
+      <a href="/w/{{ node.slug }}">{{node.title}}</a>
       {%- if node.specific.children and node.specific.children() -%}
       <ul class="submenu">{{ loop(node.specific.children()) }}</ul>
       {%- endif %}

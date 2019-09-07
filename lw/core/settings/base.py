@@ -24,8 +24,8 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
-    'home',
-    'search',
+    'lw.home',
+    'lw.search',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -63,7 +63,7 @@ MIDDLEWARE = [
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
-ROOT_URLCONF = 'LW_Wagtail.urls'
+ROOT_URLCONF = 'lw.core.urls'
 
 TEMPLATES = [
     {
@@ -83,7 +83,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'LW_Wagtail.wsgi.application'
+WSGI_APPLICATION = 'lw.core.wsgi.application'
 
 
 # Database

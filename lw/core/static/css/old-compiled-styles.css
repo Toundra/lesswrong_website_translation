@@ -613,9 +613,13 @@ ul.menu li > a.active {
 /* Breadcrumbs */
 .breadcrumb {
   font-size: 0.85em;
-  color: #999; }
-  .breadcrumb a {
-    color: black; }
+  color: #999; 
+  padding-bottom: 5px;
+}
+
+.breadcrumb a {
+  color: black; 
+}
 
 /* Primary tabs */
 .tabs.primary {

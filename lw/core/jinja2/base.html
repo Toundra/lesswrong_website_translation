@@ -12,22 +12,9 @@
 
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{{static('css/LW_Wagtail.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{static('css/old-compiled-styles.css')}}">
 
         {# Global javascript #}
-        <script type="text/javascript" src="{{static('css/LW_Wagtail.css')}}"></script>
-        <script type="text/javascript" src="{{static('sass/_common.scss')}}"></script>
-        <script type="text/javascript" src="{{static('sass/_drupal-common.scss')}}"></script>
-        <script type="text/javascript" src="{{static('sass/_front-block.scss')}}"></script>
-        <script type="text/javascript" src="{{static('sass/_header.scss')}}"></script>
-        <script type="text/javascript" src="{{static('sass/_kocherga-banner.scss')}}"></script>
-        <script type="text/javascript" src="{{static('sass/_layout.scss')}}"></script>
-        <script type="text/javascript" src="{{static('sass/_node.scss')}}"></script>
-        <script type="text/javascript" src="{{static('sass/_normalize.scss')}}"></script>
-        <script type="text/javascript" src="{{static('sass/_sidebar.scss')}}"></script>
-        <script type="text/javascript" src="{{static('sass/_translation.scss')}}"></script>
-        <script type="text/javascript" src="{{static('sass/_translation-toc.scss')}}"></script>
-        <script type="text/javascript" src="{{static('sass/_vars.scss')}}"></script>
-        <script type="text/javascript" src="{{static('sass/_main.scss')}}"></script>
     
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
@@ -100,30 +87,25 @@
             </header> <!-- /#header -->
 
 
-            <div id="breadcrumb"></div>
 
 
             <div id="main-wrapper">
 
-                {% if page['sidebar'] %}
-                    <aside id="sidebar">
-                        {% block sidebar %}{% endblock %}
-                    </aside> <!-- /#sidebar -->
-                {% endif %}
+                <aside id="sidebar">
+                    {% block sidebar %}{% endblock %}
+                </aside> <!-- /#sidebar -->
 
                 <main>
                     <header>
-                    {% if breadcrumb %}
-                        {{ breadcrumb }}
-                    {% endif %}
+                        <div class="breadcrumb" id="breadcrumb">
+                            {% block breadcrumb %}{% endblock %}
+                        </div>
 
-                    {% if tabs %}
                         <div class="tabs">
                             {% block tabs %}{% endblock %}
                         </div>
-                    {% endif %}
                     
-                    <a id="main-content"></a>
+                        <a id="main-content"></a>
                         {% block title_prefix %}{% endblock %}
                         
                         {% if title %}

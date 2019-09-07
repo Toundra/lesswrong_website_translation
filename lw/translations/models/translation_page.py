@@ -8,7 +8,6 @@ from wagtailmedia.edit_handlers import MediaChooserPanel
 
 class TranslationPage(Page):
     body = RichTextField(blank=True)
-
     author = models.CharField(max_length=100, blank=True)
     translators = models.CharField(max_length=100, blank=True)
     original_link = models.CharField(max_length=100, blank=True)

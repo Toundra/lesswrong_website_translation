@@ -1,4 +1,86 @@
-<!doctype html>
-<body>
-  <h1>Перевод: {{page.title}}</h1>
-</body>
+{% extends "base.html" %}
+
+
+{% block title %}template-homepage{% endblock %}
+
+
+{% block sidebar %}
+  text in side bar
+{% endblock %}
+
+
+{% block breadcrumb %}
+  <a>home</a>  »  <a>book</a>  »  <a disabled>translation</a>
+{% endblock %}
+
+
+{% block tabs %}
+  <a>read</a>   <a>edit</a>  <a>editions</a>
+{% endblock %}
+
+
+{% block content %}
+  <div id="node-41" class="node node-translation clearfix" about="/w/%D0%A7%D1%82%D0%BE_%D1%82%D0%B0%D0%BA%D0%BE%D0%B5_%D1%80%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C" typeof="sioc:Item foaf:Document">  
+    <span property="dc:title" content="Что такое рациональность" class="rdf-meta element-hidden"></span>
+    <span property="sioc:num_replies" content="0" datatype="xsd:integer" class="rdf-meta element-hidden"></span>
+    <h1>Перевод: {{page.title}}</h1>
+    <div class="content">
+      <div class="field field-name-field-author field-type-text field-label-hidden">
+        <div class="field-items">
+          <div class="field-item even">{{page.author}}</div>
+        </div>
+      </div>
+      <hr>
+      <div class="field field-name-body field-type-text-with-summary field-label-hidden">
+        <div class="field-items">
+          <div class="field-item even" property="content:encoded">
+            <div class="tex2jax">
+              {{page.body|safe}}
+            </div>
+          </div>
+        </div>
+      </div>		
+      <hr>
+
+      <div class="field field-name-field-translators field-type-text field-label-inline clearfix">
+        <div class="field-label">Перевод:&nbsp;</div>
+          <div class="field-items">
+            <div class="field-item even">
+              {{page.translators}}
+            </div>
+          </div>
+        </div>
+      <div class="field field-name-field-original-link field-type-link-field field-label-inline clearfix">
+      
+      <div class="field-label">Ссылка на оригинал:&nbsp;</div>
+      <div class="field-items">
+        <div class="field-item even">
+          <a href="http://lesswrong.com/lw/31/what_do_we_mean_by_rationality/" rel="nofollow" class="originallink ext" title="Ссылка на оригинальный текст">
+            What Do We Mean By "Rationality"?
+            <span class="ext" aria-label="(link is external)"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="field field-name-field-rfatz-id field-type-number-integer field-label-inline clearfix">
+      <div class="field-label">
+        Номер в книге "Рациональность: от ИИ до зомби":&nbsp;
+      </div>
+    <div class="field-items">
+    <div class="field-item even">
+      {{page.rfatz_id}}
+    </div>
+  </div>
+</div>
+  
+{% endblock content %}
+
+
+{% block header %}
+   text in header
+{% endblock %}
+
+{% block footer %}
+    text in footer
+{% endblock %}

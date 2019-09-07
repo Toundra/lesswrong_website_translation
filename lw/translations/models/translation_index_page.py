@@ -6,6 +6,9 @@ from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.core.url_routing import RouteResult
 
+from .book_page import BookPage
+from .translation_page import TranslationPage
+
 class TranslationIndexPage(Page):
     intro = RichTextField(blank=True)
 

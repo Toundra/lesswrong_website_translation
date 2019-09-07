@@ -24,7 +24,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    command: ./manage.py runserver 0.0.0.0:80
+    command: bash -c "pip install -r requirements.txt && python manage.py migrate && ./manage.py runserver 0.0.0.0:8000"
     ports:
       - "127.0.0.1:8020:80"
     depends_on:

@@ -9,3 +9,9 @@ db_setup:
 
 db_create:
 	mysql -u root -h db -e 'create database ${DB_NAME}'
+
+db_drop:
+	mysql -u root -h db -e 'drop database ${DB_NAME}'
+
+db_connect:
+	mysql -h db -u root

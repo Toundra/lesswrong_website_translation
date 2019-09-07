@@ -14,9 +14,6 @@ class BookPage(Page):
     on_vk = models.BooleanField(default=False)
     readthesequences_link = models.CharField(max_length=100, blank=True)
 
-    # illustrations
-    # ref_audio
-
     # FIXME - copy-paste from TranslationIndexPage
     def children(self):
         return Page.objects.child_of(self).live()

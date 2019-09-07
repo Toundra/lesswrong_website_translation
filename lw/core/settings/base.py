@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'lw.search',
     'lw.translations',
 
+    'wagtailmedia',
+
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.embeds',

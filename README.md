@@ -19,5 +19,6 @@
 2. Сделайте virtualenv: `python3 -mvenv venv`
 3. Активируется virtualenv: `. ./venv/bin/activate`
 4. Установите зависимости: `pip install -r ./requirements.txt`
-5. Запустите проект: `DJANGO_SETTINGS_MODULE=lw.core.settings.dev_sqlite ./manage.py runserver 8020`
-6. Заполните базу: `./manage.py migrate`
+5. Переключите django settings: `export DJANGO_SETTINGS_MODULE=lw.core.settings.dev_sqlite`
+6. Запустите проект: `./manage.py runserver 8020`
+7. Заполните базу: `./manage.py migrate`

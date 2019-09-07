@@ -3,3 +3,4 @@ LW_Wagtail/settings/dev.py
 db.sqlite3
 /db
 .#*
+/venv

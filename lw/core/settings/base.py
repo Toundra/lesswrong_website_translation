@@ -69,11 +69,13 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.jinja2.Jinja2',
         'APP_DIRS': True,
-        'extensions': [
-            'wagtail.core.jinja2tags.core',
-            'wagtail.admin.jinja2tags.userbar',
-            'wagtail.images.jinja2tags.images',
-        ],
+        'OPTIONS': {
+            'extensions': [
+                'wagtail.core.jinja2tags.core',
+                'wagtail.admin.jinja2tags.userbar',
+                'wagtail.images.jinja2tags.images',
+            ],
+        },
     },
     # needed for admin
     {
@@ -102,9 +104,9 @@ WSGI_APPLICATION = 'lw.core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ['DB_NAME'],
-        'USER': os.environ['DB_USER'],
-        'PASSWORD': os.environ['DB_PASSWORD'],
+        'NAME': os.environ.get('DB_NAME', 'oops'),  # 'oops' is to avoid failure when we start dev_sqlite
+        'USER': os.environ.get('DB_USER', 'oops'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'oops'),
         'HOST': 'db',
     }
 }

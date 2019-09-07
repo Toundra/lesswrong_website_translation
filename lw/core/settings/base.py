@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'lw.core',
     'lw.home',
     'lw.search',
+    'lw.translations',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',

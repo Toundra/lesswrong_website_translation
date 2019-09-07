@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('wagtailmedia', '0003_copy_media_permissions_to_collections'),
-        ('translations', '0002_translationpage'),
+        ('translations', '0005_optional_fields'),
     ]
 
     operations = [

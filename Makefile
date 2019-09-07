@@ -4,11 +4,8 @@ dev:
 migrate:
 	docker-compose exec app ./manage.py migrate
 
-shell:
-	docker-compose exec app bash
+db_setup:
+	make db_create && python ./manage.py migrate && python ./manage.py createsuperuser
 
-dbshell:
-	docker-compose exec db mysql lw
-
-pyshell:
-	docker-compose exec db ./manage.py shell
+db_create:
+	mysql -u root -h db -e 'create database ${DB_NAME}'

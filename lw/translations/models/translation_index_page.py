@@ -48,6 +48,8 @@ class TranslationIndexPage(Page):
                 # the page matches the request, but isn't published, so 404
                 raise Http404
 
+    parent_page_types = ['home.HomePage']
+    subpage_types = ['translations.BookPage', 'translations.TranslationPage']
 
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full")

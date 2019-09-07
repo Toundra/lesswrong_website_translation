@@ -21,6 +21,9 @@ class BookPage(Page):
     def children(self):
         return Page.objects.child_of(self).live()
 
+    parent_page_types = ['translations.BookPage', 'translations.TranslationIndexPage']
+    subpage_types = ['translations.BookPage', 'translations.TranslationPage']
+
     content_panels = Page.content_panels + [
         FieldPanel('body', classname="full"),
         FieldPanel('author'),

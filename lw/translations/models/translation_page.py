@@ -17,6 +17,9 @@ class TranslationPage(Page):
     # field_illustrations
     # field_ref_audio
 
+    parent_page_types = ['translations.BookPage', 'translations.TranslationIndexPage']
+    subpage_types = []
+
     content_panels = Page.content_panels + [
         FieldPanel('body', classname="full"),
         FieldPanel('author'),

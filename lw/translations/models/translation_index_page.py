@@ -6,16 +6,11 @@ from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.core.url_routing import RouteResult
 
-from .book_page import BookPage
-
 class TranslationIndexPage(Page):
     intro = RichTextField(blank=True)
 
-    def get_context(self, request):
-        context = super().get_context(request)
-
-        context['books'] = BookPage.objects.child_of(self).live()
-        return context
+    def children(self):
+        return Page.objects.child_of(self).live()
 
     def route(self, request, path_components):
         if path_components:

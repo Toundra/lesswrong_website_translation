@@ -67,6 +67,16 @@ ROOT_URLCONF = 'lw.core.urls'
 
 TEMPLATES = [
     {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'APP_DIRS': True,
+        'extensions': [
+            'wagtail.core.jinja2tags.core',
+            'wagtail.admin.jinja2tags.userbar',
+            'wagtail.images.jinja2tags.images',
+        ],
+    },
+    # needed for admin
+    {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(PROJECT_DIR, 'templates'),

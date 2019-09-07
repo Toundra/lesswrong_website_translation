@@ -24,9 +24,9 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    command: ./manage.py runserver 0.0.0.0:8000
+    command: ./manage.py runserver 0.0.0.0:80
     ports:
-      - "127.0.0.1:8020:8000"
+      - "127.0.0.1:8020:80"
     depends_on:
       - db
     restart: always

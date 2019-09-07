@@ -17,11 +17,9 @@ class BookPage(Page):
     # illustrations
     # ref_audio
 
-    def get_context(self, request):
-        context = super().get_context(request)
-
-        context['books'] = BookPage.objects.child_of(self).live()
-        return context
+    # FIXME - copy-paste from TranslationIndexPage
+    def children(self):
+        return Page.objects.child_of(self).live()
 
     content_panels = Page.content_panels + [
         FieldPanel('body', classname="full"),

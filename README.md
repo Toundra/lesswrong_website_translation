@@ -17,6 +17,7 @@
 
 1. Убедитесь, что у вас установлен python3.7.
 2. Сделайте virtualenv: `python3 -mvenv venv`
-3. Установите зависимости: `pip install -r ./requirements.txt`
-4. Запустите проект: `DJANGO_SETTINGS_MODULE=lw.core.settings.dev_sqlite ./manage.py runserver 8020`
-5. Заполните базу: `./manage.py migrate`
+3. Активируется virtualenv: `. ./venv/bin/activate`
+4. Установите зависимости: `pip install -r ./requirements.txt`
+5. Запустите проект: `DJANGO_SETTINGS_MODULE=lw.core.settings.dev_sqlite ./manage.py runserver 8020`
+6. Заполните базу: `./manage.py migrate`

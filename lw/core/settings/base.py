@@ -70,6 +70,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.jinja2.Jinja2',
         'APP_DIRS': True,
         'OPTIONS': {
+            'environment': 'lw.core.jinja2.environment',
             'extensions': [
                 'wagtail.core.jinja2tags.core',
                 'wagtail.admin.jinja2tags.userbar',

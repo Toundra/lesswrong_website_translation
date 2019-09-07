@@ -1,0 +1,33 @@
+@import 'vars';
+
+main {
+
+  p {
+    margin: 1em 0 0 0;
+    line-height: 1.4;
+  }
+  p:first-child {
+    margin-top: 0.2em;
+  }
+  p:last-child {
+    margin-bottom: 1em;
+  }
+}
+
+.field-name-body {
+  font-family: $font-serif;
+  font-size: 18px;
+
+  li {
+    line-height: 1.4;
+  }
+}
+
+.field-label-inline {
+  margin-bottom: 6px;
+
+  .field-label {
+    font-weight: normal;
+    color: $grey;
+  }
+}

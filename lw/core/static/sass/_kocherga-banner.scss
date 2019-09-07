@@ -1,0 +1,26 @@
+.kocherga-banner a {
+  text-decoration: none;
+  color: black;
+}
+
+.kocherga-banner--logo {
+  vertical-align: middle;
+  width: 50px;
+  height: auto;
+  margin-right: 20px;
+}
+.kocherga-banner--box {
+  border: #99b4ff 1px solid;
+  padding: 8px 12px;
+  margin: 40px 0;
+  font-size: 1.1em;
+  line-height: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #d6e1ff;
+}
+.kocherga-banner--small {
+  font-size: 0.7em;
+}

@@ -1,0 +1,61 @@
+#block-lwcustom-lw-translations-toc {
+  ul {
+    padding-left: 0;
+    margin-bottom: 10px;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  li > a {
+    color: black;
+    display: block;
+  }
+
+  li.leaf > a:visited {
+    color: #666;
+  }
+
+  li.expanded {
+    margin: 0;
+    padding: 0;
+  }
+
+  .expanded.menu-depth-1 {
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .expanded.menu-depth-1 > a {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+
+  li.menu-depth-4 {
+    margin-left: 20px;
+  }
+
+  li.menu-depth-5 {
+    margin-left: 20px;
+  }
+
+  .expanded.menu-depth-2 > a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 15px;
+  }
+
+  .expanded.menu-depth-3 > a {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .expanded.menu-depth-4 > a {
+    font-size: 1.2rem;
+  }
+}

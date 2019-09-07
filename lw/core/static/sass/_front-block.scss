@@ -1,0 +1,44 @@
+@import 'vars';
+
+.front-block {
+  text-decoration: none;
+  color: black;
+
+  > div {
+    border-left: #777 4px solid;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    @media (max-width: 780px) {
+      padding: 10px;
+    }
+  }
+
+  img {
+    height: auto;
+  }
+
+  header {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-decoration: underline;
+    font-family: $font-serif;
+  }
+
+  p {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: $font-sans-serif;
+  }
+}
+
+
+.front-block--icon {
+  width: 50px;
+  margin-right: 20px;
+  @media (max-width: 780px) {
+    margin-right: 10px;
+  }
+}

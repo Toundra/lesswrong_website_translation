@@ -1,0 +1,127 @@
+@import 'vars';
+
+#page-title {
+  font-weight: bold;
+}
+
+.block {
+  margin-bottom: 20px;
+}
+
+.tabs {
+  font-size: 0.8em;
+}
+
+.tabs.primary .active a {
+  background-color: white;
+  border-bottom-color: white;
+}
+
+.node-links-nav {
+  margin-top: 5px;
+  font-size: 0.8em;
+}
+
+ul.inline li {
+  padding: 0;
+  padding-right: 10px;
+}
+
+ul li.leaf {
+  list-style-image: none;
+  list-style-type: disc;
+}
+
+ul li.collapsed {
+  list-style-image: none;
+  list-style-type: none;
+  position: relative;
+}
+ul li.collapsed:before {
+  content: "\2023 \0020";
+  font-size: 1.4em;
+  line-height: 0;
+  position: absolute;
+  top: 0.55em;
+  left: -0.75em;
+}
+
+ul.menu {
+    padding: 0;
+}
+
+ul.menu ul {
+  padding-left: 15px;
+}
+
+ul.menu li {
+  margin: 0;
+}
+
+ul.menu li > a {
+    text-decoration-skip: ink;
+    color: black;
+}
+ul.menu li > a.active {
+    font-weight: bold;
+}
+
+/*
+ * User menu block
+ */
+#block-system-user-menu {
+  > h2 {
+    display: none;
+  }
+  ul.menu > li {
+    text-align: right;
+    list-style: none;
+  }
+}
+
+
+/* Breadcrumbs */
+.breadcrumb {
+  font-size: 0.85em;
+  color: #999;
+
+  a {
+    color: black;
+  }
+}
+
+/* Primary tabs */
+.tabs.primary {
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.85em;
+
+  li a {
+    border: none;
+    margin: 0;
+    margin-right: 4px;
+    padding: 1px;
+    background-color: inherit;
+    color: #999;
+    font-family: $font-sans-serif;
+  }
+
+  li.active a {
+    border: none;
+    margin: 0;
+    margin-right: 4px;
+    padding: 1px;
+    color: black;
+  }
+
+}
+
+ul li.statistics_counter {
+  display: none;
+}
+
+.addtoany_list {
+  display: block;
+  margin: 10px 0;
+}

@@ -1,0 +1,63 @@
+#sidebar {
+  h2 {
+    margin: 0.4em 0;
+    font-size: 1.2em;
+    font-weight: normal;
+  }
+
+  .content {
+    font-size: 0.85em;
+  }
+
+  a {
+    color: black;
+
+    &:hover {
+      color: hsl(200, 90%, 45%);
+    }
+  }
+
+  li {
+    margin: 0.5em 0;
+  }
+
+  li.leaf, li.views-row, .item-list li {
+    padding: 0;
+
+    list-style-type: none;
+    list-style-image: none;
+  }
+
+  .kocherga-event-aggregator-description {
+    color: #666;
+  }
+}
+
+div.vkwidget {
+  overflow: hidden;
+  height: 272px;
+  background: #fff;
+}
+
+
+/*
+ * Search sidebar block
+ */
+#search-block-form .container-inline {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 1rem;
+
+  > .form-item {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 15px;
+    flex: 1;
+
+    > input {
+      width: 100%;
+    }
+  }
+}
+

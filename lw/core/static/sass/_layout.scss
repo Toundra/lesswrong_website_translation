@@ -1,0 +1,42 @@
+@import 'vars';
+
+#header {
+  margin-bottom: 25px;
+}
+
+#footer {
+  margin-top: 25px;
+}
+
+#main-wrapper {
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+#sidebar {
+  flex: 0 auto;
+  border: 1px solid hsl(0, 0%, 87%);
+  border-left: none;
+  padding: 0 20px;
+  padding-top: 20px;
+  background-color: #f8f8f8;
+  width: $left-column-width;
+
+  @media (max-width: 780px) {
+    display: none;
+  }
+}
+
+
+main {
+  margin-left: $column-gap-width;
+  max-width: 770px;
+  flex: 1;
+
+  @media (max-width: 1120px) {
+    padding: 0 10px;
+    margin: 0 auto;
+  }
+}

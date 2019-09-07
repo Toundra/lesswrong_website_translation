@@ -1,0 +1,15 @@
+@import 'normalize';
+
+@import 'common';        // General styles
+@import 'layout';        // Major regions
+@import 'header';        // Top menu
+@import 'drupal-common'; // Common Drupal classes styled
+@import 'node';          // <main> styling
+@import 'sidebar';       // Left sidebar
+
+// LW-specific blocks and nodes
+
+@import 'translation';      // Translation node
+@import 'translations-toc'; // Translations table of contents
+@import 'kocherga-banner';  // Kocherga workshop banner
+@import 'front-block';      // Fancy block on the front page

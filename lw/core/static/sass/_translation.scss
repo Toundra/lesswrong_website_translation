@@ -1,0 +1,47 @@
+@import 'vars';
+
+.field-name-field-author {
+  font-style: italic;
+  font-size: 1.2em;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-family: $font-serif;
+}
+
+div.field-name-field-translators
+{
+  max-width: 100%;
+  float: right;
+}
+
+span.translations-red {
+  color: #ff3300;
+}
+
+span.translations-darkred {
+  color: #cc0033;
+}
+
+span.translations-brown {
+  color: #663300;
+}
+
+span.translations-purple {
+  color: #9900ff;
+}
+
+span.translations-grey {
+  color: #666633;
+}
+
+span.translations-green {
+  color: #00cc00;
+}
+
+span.translations-blue {
+  color: #0000cc;
+}
+
+span.translations-violet {
+  color: #6633cc;
+}

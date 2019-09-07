@@ -17,6 +17,12 @@ class BookPage(Page):
     # illustrations
     # ref_audio
 
+    def get_context(self, request):
+        context = super().get_context(request)
+
+        context['books'] = BookPage.objects.child_of(self).live()
+        return context
+
     content_panels = Page.content_panels + [
         FieldPanel('body', classname="full"),
         FieldPanel('author'),

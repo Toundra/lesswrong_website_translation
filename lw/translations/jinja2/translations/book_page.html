@@ -1,4 +1,18 @@
-<!doctype html>
-<body>
-  <h1>Подшивка: {{page.title}}</h1>
-</body>
+{% extends "base.html" %}
+
+{% block title %}{{page.title}}{% endblock %}
+
+{% block content %}
+<h1>Подшивка: {{page.title}}</h1>
+
+<ul>
+  {% for node in page.children() recursive %}
+  <li>
+    <a href="/w/{{ node.slug }}">{{node.title}}</a>
+    {%- if node.specific.children and node.specific.children() -%}
+    <ul class="submenu">{{ loop(node.specific.children()) }}</ul>
+    {%- endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

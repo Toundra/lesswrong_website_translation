@@ -169,7 +169,6 @@ STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, 'search', 'static')
 ]
 
-print(STATICFILES_DIRS)
 
 
 # ManifestStaticFilesStorage is recommended in production, to prevent outdated

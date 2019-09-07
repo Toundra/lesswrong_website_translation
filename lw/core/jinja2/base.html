@@ -1,7 +1,6 @@
-{{static('wagtailuserbar')}}
 
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="js" lang="en">
     <head>
         <meta charset="utf-8" />
         <title>
@@ -16,6 +15,19 @@
 
         {# Global javascript #}
         <script type="text/javascript" src="{{static('css/LW_Wagtail.css')}}"></script>
+        <script type="text/javascript" src="{{static('sass/_common.scss')}}"></script>
+        <script type="text/javascript" src="{{static('sass/_drupal-common.scss')}}"></script>
+        <script type="text/javascript" src="{{static('sass/_front-block.scss')}}"></script>
+        <script type="text/javascript" src="{{static('sass/_header.scss')}}"></script>
+        <script type="text/javascript" src="{{static('sass/_kocherga-banner.scss')}}"></script>
+        <script type="text/javascript" src="{{static('sass/_layout.scss')}}"></script>
+        <script type="text/javascript" src="{{static('sass/_node.scss')}}"></script>
+        <script type="text/javascript" src="{{static('sass/_normalize.scss')}}"></script>
+        <script type="text/javascript" src="{{static('sass/_sidebar.scss')}}"></script>
+        <script type="text/javascript" src="{{static('sass/_translation.scss')}}"></script>
+        <script type="text/javascript" src="{{static('sass/_translation-toc.scss')}}"></script>
+        <script type="text/javascript" src="{{static('sass/_vars.scss')}}"></script>
+        <script type="text/javascript" src="{{static('sass/_main.scss')}}"></script>
     
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
@@ -34,8 +46,8 @@
             <header id="header">
 
             <div id="logo">
-                <a href="{{front_page}}" title="{{Home}}" rel="home">
-                <img src="/sites/all/themes/THEMENAME/lw-logo.svg" alt="{{Home}}" />
+                <a href="./" title="Home" rel="home">
+                <img src="{{static('img/lw-logo.svg')}}" alt="Home" />
                 </a>
             </div>
 
@@ -128,7 +140,6 @@
 
                     {% block content %}{% endblock %}
 
-                    {{feed_icons}}
                 
                 </main>
 

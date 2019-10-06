@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}template-homepage{% endblock %}
+{% block title %}LessWrong на русском | Статьи по рациональному мышлению{% endblock %}
 
 {% block sidebar %}
-text in side bar
+{% include 'home/sidebar_content.html' %}
 {% endblock %}
 
 {% block content %}
-    123234
+  {% include 'home/hero.html' %}
+  {% include_block page.site_areas %}
 {% endblock content %}
-
 
 {% block header %}
    text in header

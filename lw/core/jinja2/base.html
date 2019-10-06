@@ -16,7 +16,7 @@
         <link rel="stylesheet" type="text/css" href="{{static('css/old-compiled-styles.css')}}">
 
         {# Global javascript #}
-    
+
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
         {% endblock %}
@@ -42,7 +42,7 @@
             {% block header %}{% endblock %}
 
             {% if main_menu or secondary_menu %}
-            
+
                 <nav id="primary-menu-nav">
                 </nav>
 
@@ -53,7 +53,7 @@
                         <!--
                         <?php print theme('links__system_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('id' => 'secondary-menu', 'class' => array('links', 'inline', 'clearfix')), 'heading' => t('Secondary menu'))); ?>
                         -->
-                        
+
                         <li><a href="/user">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 438.529 438.529" style="enable-background:new 0 0 438.529 438.529;" xml:space="preserve">
                                 <g>
@@ -88,8 +88,6 @@
             </header> <!-- /#header -->
 
 
-
-
             <div id="main-wrapper">
 
                 <aside id="sidebar">
@@ -105,15 +103,14 @@
                         <div class="tabs">
                             {% block tabs %}{% endblock %}
                         </div>
-                    
+
                         <a id="main-content"></a>
                         {% block title_prefix %}{% endblock %}
-                        
+
                         {% if title %}
                             <h1 class="title" id="page-title">{{title}}</h1>
                         {% endif %}
-                        
-                        
+
                         {% if action_links %}
                             <ul class="action-links">
                                 {% block action_links %}{% endblock %}
@@ -123,7 +120,6 @@
 
                     {% block content %}{% endblock %}
 
-                
                 </main>
 
             </div> <!-- /#main-wrapper -->

@@ -12,3 +12,11 @@ db_setup: migrate
 
 db_connect:
 	docker-compose exec app mysql -h db
+
+dbshell: db_connect
+
+shell:
+	docker-compose exec app bash
+
+pyshell:
+	docker-compose exec app ./manage.py shell

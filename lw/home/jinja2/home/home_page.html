@@ -3,14 +3,14 @@
 {% block title %}{{ page.title }}{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" type="text/css" href="{{static('css/home/front-block.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{static('css/home/front-block.css')}}">
 {% endblock %}
 
 {% block sidebar %}
-  {% include 'home/sidebar_content.html' %}
+  {% include "home/sidebar_content.html" %}
 {% endblock %}
 
 {% block content %}
-  {% include 'home/hero.html' %}
+  {% include "home/hero.html" %}
   {% include_block page.site_areas %}
 {% endblock content %}

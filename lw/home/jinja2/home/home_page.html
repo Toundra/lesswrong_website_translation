@@ -2,6 +2,10 @@
 
 {% block title %}LessWrong на русском | Статьи по рациональному мышлению{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{{static('css/home/front-block.css')}}">
+{% endblock %}
+
 {% block sidebar %}
 {% include 'home/sidebar_content.html' %}
 {% endblock %}

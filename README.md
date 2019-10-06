@@ -8,8 +8,8 @@
 
 ### Docker way
 
-1. `make dev` - поднимает docker-образы через docker-compose (django-приложение и mysql-базу).
-2. `make migrate` - создаёт таблицы в базе.
+1. `make dev` - поднимает docker-образы через docker-compose (django-приложение и mysql-базу). При запуске контейнер `app` будет поначалу выдавать ошибки (пока запускается база), это нормально.
+2. `make db_setup` - создаёт таблицы.
 
 ### Без Docker
 

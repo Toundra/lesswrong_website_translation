@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 
-{% block title %}template-homepage{% endblock %}
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{{static('css/home/front-block.css')}}">
+{% endblock %}
 
 {% block sidebar %}
-text in side bar
+  {% include 'home/sidebar_content.html' %}
 {% endblock %}
 
 {% block content %}
-    123234
+  {% include 'home/hero.html' %}
+  {% include_block page.site_areas %}
 {% endblock content %}
-
 
 {% block header %}
    text in header
-{% endblock %}
-
-{% block footer %}
-    text in footer
 {% endblock %}

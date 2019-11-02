@@ -36,3 +36,7 @@ class TranslationPage(Page):
         FieldPanel('readthesequences_link'),
         MediaChooserPanel('audio'),
     ]
+
+    def get_url_parts(self, *args, **kwargs):
+        (site_id, root_url, _) = super().get_url_parts(*args, **kwargs)
+        return (site_id, root_url, '/w/' + self.slug)

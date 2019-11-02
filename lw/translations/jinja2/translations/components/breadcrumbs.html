@@ -1,0 +1,9 @@
+{% set ancestors = page.get_ancestors() %}
+{% if ancestors %}
+  <div>
+    {% for ancestor in ancestors[1:] %}
+        <a href="{{ ancestor.specific.url }}">{{ ancestor }}</a>
+        {% if not loop.last %} » {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

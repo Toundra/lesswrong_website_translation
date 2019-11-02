@@ -1,4 +1,5 @@
 import json
+import re
 from django.contrib.contenttypes.models import ContentType
 
 from wagtail.core.models import Page
@@ -91,7 +92,8 @@ class BookImporter():
 
 
     def generate_slug(self, book_json):
+        print(book_json)
         link_title = book_json['link_title']
-        slug = link_title.replace(' ', '_').replace('.', '_')
+        slug = re.sub(r'[:«»_—,?.!+= ]+', '_', link_title)
 
         return slug

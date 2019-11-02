@@ -5,7 +5,7 @@ from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 
 class BookPage(Page):
-    body = RichTextField(blank=True)
+    body = RichTextField(blank=True, null=True)
 
     author = models.CharField(max_length=100, blank=True, null=True)
     translators = models.CharField(max_length=100, blank=True, null=True)

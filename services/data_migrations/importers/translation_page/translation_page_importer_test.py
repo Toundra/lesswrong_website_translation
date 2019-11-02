@@ -17,10 +17,10 @@ class TranslationPageImporterTest(TestCase):
 
     def test_import_one_translation_page(self):
         # TODO relative path
-        json_path = '/code/services/data_migrations/importers/translation_page/translations.json'
-        old_count = TranslationPage.objects.count
+        json_path = '/code/services/data_migrations/importers/translation_page/fixtures/translations.json'
+        old_count = TranslationPage.objects.count()
 
         TranslationPageImporter(json_path).run()
 
-        count = TranslationPage.objects.count
+        count = TranslationPage.objects.count()
         self.assertEqual(old_count + 1, count)

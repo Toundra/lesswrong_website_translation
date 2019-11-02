@@ -25,9 +25,10 @@ deploy-stack:
     - apk add --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make
     - pip install docker-compose
     # prepare ssh key for docker
-    - mkdir -p ~/.ssh
-    - echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
-    - chmod 0600 ~/.ssh/id_rsa
+    - eval $(ssh-agent)
+    - echo "$DEPLOY_KEY" > ~/deploy-key
+    - chmod 0600 ~/deploy-key
+    - ssh-add ~/deploy-key
     - ssh-keyscan $DEPLOY_HOST >~/.ssh/known_hosts
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     # migrate and collect static

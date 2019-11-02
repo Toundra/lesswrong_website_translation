@@ -1,0 +1,7 @@
+django==2.2.5
+wagtail==2.6.1
+wagtailmedia==0.3.1
+wagtailmenus
+gunicorn
+jinja2
+mysqlclient

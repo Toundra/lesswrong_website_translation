@@ -20,3 +20,8 @@ shell:
 
 pyshell:
 	docker-compose exec app ./manage.py shell
+
+update_requirements:
+	docker cp requirements.in $$(basename `pwd`)_app_1:/code/requirements.in
+	docker-compose exec app pip-compile
+	docker cp $$(basename `pwd`)_app_1:/code/requirements.txt ./requirements.txt

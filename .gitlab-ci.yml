@@ -37,4 +37,4 @@ deploy-stack:
     # deploy
     - docker-compose up -d
   only:
-    - master
+    - deploy

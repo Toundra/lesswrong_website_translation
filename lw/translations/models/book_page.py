@@ -7,12 +7,12 @@ from wagtail.admin.edit_handlers import FieldPanel
 class BookPage(Page):
     body = RichTextField(blank=True)
 
-    author = models.CharField(max_length=100, blank=True)
-    translators = models.CharField(max_length=100, blank=True)
-    original_link = models.CharField(max_length=100, blank=True)
+    author = models.CharField(max_length=100, blank=True, null=True)
+    translators = models.CharField(max_length=100, blank=True, null=True)
+    original_link = models.CharField(max_length=100, blank=True, null=True)
     rfatz_id = models.PositiveSmallIntegerField(null=True, blank=True)
     on_vk = models.BooleanField(default=False)
-    readthesequences_link = models.CharField(max_length=100, blank=True)
+    readthesequences_link = models.CharField(max_length=100, blank=True, null=True)
 
     # FIXME - copy-paste from TranslationIndexPage
     def children(self):

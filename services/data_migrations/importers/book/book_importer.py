@@ -5,7 +5,9 @@ from wagtail.core.models import Page
 from lw.translations.models.book_page import BookPage
 from lw.translations.models.translation_index_page import TranslationIndexPage
 from lw.translations.models.translation_page import TranslationPage
+from django.conf import settings
 
+WAGTAIL_ALLOW_UNICODE_SLUGS = True
 
 def patched_save(self, *args, **kwargs):
     print('exec patched Page save method')
@@ -77,12 +79,22 @@ class BookImporter():
                 id=book_json['nid'],
                 title='book',
                 slug=slug,
-                content_type=bookpage_type
+                content_type=bookpage_type,
+                body=book_json['body_value'],
+                author=book_json['field_author_value'],
+                translators=book_json['field_translators_value'],
+                original_link=book_json['field_original_link_url'],
+                rfatz_id=book_json['field_rfatz_id_value'],
+                on_vk=book_json['field_on_vk_value'] or False,
+                readthesequences_link=book_json['field_readthesequences_link_url'],
                 )
 
         return book
 
 
-    # TODO need to find drupal's algorithm
     def generate_slug(self, book_json):
-        slug = book_json['link_path'].split('/')[0]
+        link_title = book_json['link_title']
+        formatted_link_title = link_title.replace(' ', '_')
+        slug = '{link_title}'.format(link_title=formatted_link_title)
+
+        return slug

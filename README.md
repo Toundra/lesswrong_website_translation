@@ -22,3 +22,12 @@
 5. Переключите django settings: `export DJANGO_SETTINGS_MODULE=lw.core.settings.dev_sqlite`
 6. Запустите проект: `./manage.py runserver 8020`
 7. Заполните базу: `./manage.py migrate`
+
+## Как добавить Python-модуль
+
+Управление зависимостями сделано с помощью [pip-tools](https://github.com/jazzband/pip-tools).
+
+1. `make dev` - запустите среду разработки.
+2. Добавьте нужную зависимость в `requirements.in`.
+3. `make update_requirements` - обновите `requirements.txt`.
+4. Перезапустите `make dev`, чтобы пересобрать образ.

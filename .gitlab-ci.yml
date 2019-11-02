@@ -18,17 +18,14 @@ build:
 deploy-stack:
   stage: deploy
   variables:
-    DOCKER_HOST: tcp://$DEPLOY_HOST:2376
-    DOCKER_TLS_VERIFY: 1
+    DOCKER_HOST: ssh://$DEPLOY_HOST
     TAG: $CI_COMMIT_REF_NAME
-    HOST_IP: $DEPLOY_HOST
   script:
-    # prepare docker
-    - mkdir -p ~/.docker
-    - echo "$DOCKER_CACERT" > ~/.docker/ca.pem
-    - echo "$DOCKER_CERT" > ~/.docker/cert.pem
-    - echo "$DOCKER_KEY" > ~/.docker/key.pem
-    # one more login, since we changed the docker endpoint
+    # prepare ssh key for docker
+    - mkdir -p ~/.ssh
+    - echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+    - chmod 0600 ~/.ssh/id_rsa
+    # one more login, since we changed the docker endpoint (TODO - is this needed?)
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     # migrate and collect static
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME

@@ -5,7 +5,7 @@ services:
 
 before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-  - apk add git
+  - apk add git openssh-client
 
 build:
   stage: build

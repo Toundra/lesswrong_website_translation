@@ -20,6 +20,7 @@ deploy-stack:
   variables:
     DOCKER_HOST: ssh://root@$DEPLOY_HOST
     TAG: $CI_COMMIT_REF_NAME
+    HOST_IP: $DEPLOY_HOST
   script:
     # install docker-compose
     - apk add --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make
@@ -34,8 +35,8 @@ deploy-stack:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     # migrate and collect static
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-    - docker-compose run --rm app ./manage.py migrate
-    - docker-compose run --rm app ./manage.py collectstatic --no-input
+    - docker-compose -f ./docker-compose.prod.yml run --rm app ./manage.py migrate
+    - docker-compose -f ./docker-compose.prod.yml run --rm app ./manage.py collectstatic --no-input
     # deploy
     - docker-compose up -d
   only:

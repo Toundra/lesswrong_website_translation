@@ -5,13 +5,13 @@ services:
 
 before_script:
   - apk add git openssh-client
-  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
 build:
   stage: build
   script:
     - git submodule sync --recursive
     - git submodule update --init --recursive
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
 
@@ -26,7 +26,6 @@ deploy-stack:
     - echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
     - chmod 0600 ~/.ssh/id_rsa
     - ssh-keyscan $DEPLOY_HOST >~/.ssh/known_hosts
-    # one more login, since we changed the docker endpoint (TODO - is this needed?)
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     # migrate and collect static
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME

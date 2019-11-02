@@ -7,6 +7,7 @@ from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from lw.search import views as search_views
+from . import views
 
 urlpatterns = [
     path('django-admin/', admin.site.urls),
@@ -15,6 +16,8 @@ urlpatterns = [
     path('documents/', include(wagtaildocs_urls)),
 
     path('search/', search_views.search, name='search'),
+
+    path('user/logout/', views.logout_view),
 
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in

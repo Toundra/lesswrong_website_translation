@@ -18,7 +18,7 @@ build:
 deploy-stack:
   stage: deploy
   variables:
-    DOCKER_HOST: ssh://$DEPLOY_HOST
+    DOCKER_HOST: ssh://root@$DEPLOY_HOST
     TAG: $CI_COMMIT_REF_NAME
   script:
     # prepare ssh key for docker

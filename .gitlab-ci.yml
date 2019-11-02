@@ -25,6 +25,7 @@ deploy-stack:
     - mkdir -p ~/.ssh
     - echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
     - chmod 0600 ~/.ssh/id_rsa
+    - ssh-keyscan $DEPLOY_HOST >~/.ssh/known_hosts
     # one more login, since we changed the docker endpoint (TODO - is this needed?)
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     # migrate and collect static

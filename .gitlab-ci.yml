@@ -21,6 +21,9 @@ deploy-stack:
     DOCKER_HOST: ssh://root@$DEPLOY_HOST
     TAG: $CI_COMMIT_REF_NAME
   script:
+    # install docker-compose
+    - apk add --no-cache py-pip
++   - pip install docker-compose
     # prepare ssh key for docker
     - mkdir -p ~/.ssh
     - echo "$DEPLOY_KEY" > ~/.ssh/id_rsa

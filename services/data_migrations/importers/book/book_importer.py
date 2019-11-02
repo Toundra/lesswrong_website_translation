@@ -92,6 +92,6 @@ class BookImporter():
 
     def generate_slug(self, book_json):
         link_title = book_json['link_title']
-        slug = link_title.replace(' ', '_')
+        slug = link_title.replace(' ', '_').replace('.', '_')
 
         return slug

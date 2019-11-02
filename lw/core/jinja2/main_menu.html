@@ -1,19 +1,12 @@
 <header id="header">
   <div id="logo">
-    <a href="./" title="Home" rel="home">
+    <a href="/" title="Home" rel="home">
       <img src="{{static("img/lw-logo.svg")}}" alt="Home" />
     </a>
   </div>
 
   <nav id="primary-menu-nav">
-    <ul>
-      <li><a href="/w">Переводы</a></li>
-      <li><a href="/wiki">Вики</a></li>
-      <li><a href="/wiki/Встречи_сообщества">Встречи</a></li>
-      <li><a href="/slack">Чат</a></li>
-      <li><a href="/forum">Форум</a></li>
-      <li><a href="/about">О сайте</a></li>
-    </ul>
+    {{ main_menu() }}
   </nav>
 
   <nav id="secondary-menu-nav">

@@ -30,3 +30,7 @@ class BookPage(Page):
         FieldPanel('on_vk'),
         FieldPanel('readthesequences_link'),
     ]
+
+    def get_url_parts(self, *args, **kwargs):
+        (site_id, root_url, _) = super().get_url_parts(*args, **kwargs)
+        return (site_id, root_url, '/w/' + self.slug)

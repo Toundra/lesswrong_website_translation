@@ -29,6 +29,7 @@ deploy-stack:
     - echo "$DEPLOY_KEY" > ~/deploy-key
     - chmod 0600 ~/deploy-key
     - ssh-add ~/deploy-key
+    - mkdir ~/.ssh
     - ssh-keyscan $DEPLOY_HOST >~/.ssh/known_hosts
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     # migrate and collect static

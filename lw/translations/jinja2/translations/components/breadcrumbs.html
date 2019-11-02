@@ -1,12 +1,9 @@
 {% set ancestors = page.get_ancestors() %}
 {% if ancestors %}
   <div>
-    {% for ancestor in ancestors %}
-    <!-- FIXME: try to take all pages but the root another way -->
-      {% if not ancestor.is_root() %}
+    {% for ancestor in ancestors[1:] %}
         <a href="{{ ancestor.specific.url }}">{{ ancestor }}</a>
         {% if not loop.last %} » {% endif %}
-      {% endif %}
     {% endfor %}
   </div>
 {% endif %}

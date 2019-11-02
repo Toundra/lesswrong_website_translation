@@ -1,0 +1,16 @@
+<ul>
+  {% if request.user.is_authenticated %}
+  <li><a href="/admin/account/">
+    {% include "core/components/user.svg" %}
+  </a></li>
+
+  <li><a href="/user/logout/">
+    {% include "core/components/sign_out.svg" %}
+  </a></li>
+
+  {% else %}
+  <li><a href="/admin/login/?next={{request.path}}">
+    {% include "core/components/sign_in.svg" %}
+  </a></li>
+  {% endif %}
+</ul>

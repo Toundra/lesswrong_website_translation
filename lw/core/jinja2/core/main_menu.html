@@ -1,0 +1,16 @@
+<header id="header">
+  <div id="logo">
+    <a href="/" title="Home" rel="home">
+      <img src="{{static("img/lw-logo.svg")}}" alt="Home" />
+    </a>
+  </div>
+
+  <nav id="primary-menu-nav">
+    {{ main_menu() }}
+  </nav>
+
+  <nav id="secondary-menu-nav">
+    {% include "core/user_controls.html" %}
+  </nav>
+
+</header>

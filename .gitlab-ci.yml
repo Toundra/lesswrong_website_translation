@@ -5,12 +5,13 @@ services:
 
 before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - apk add git
 
 build:
   stage: build
   script:
-    - git submodule init
-    - git submodule update
+    - git submodule sync --recursive
+    - git submodule update --init --recursive
     - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
 

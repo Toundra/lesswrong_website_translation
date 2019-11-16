@@ -1,0 +1,13 @@
+{% set ancestors = page.get_ancestors(True) %}
+{% for node in ancestors[2].specific.children() recursive %}
+<li>
+  {% if node == ancestors|last %}
+    <b><a href="{{ node.specific.url }}">{{node.title}}</a></b>
+  {% else %}
+    <a href="{{ node.specific.url }}">{{node.title}}</a>
+  {% endif %}
+  {%- if node in ancestors and node.specific.children and node.specific.children() -%}
+  <ul class="submenu">{{ loop(node.specific.children()) }}</ul>
+  {%- endif %}
+</li>
+{% endfor %}

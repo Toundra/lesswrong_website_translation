@@ -2,15 +2,12 @@ import json
 import re
 from django.contrib.contenttypes.models import ContentType
 
-import pandas as pd
-
 from wagtail.core.models import Page
 from lw.translations.models.translation_index_page import TranslationIndexPage
 from lw.translations.models.translation_page import TranslationPage
 
 
 def patched_save(self, *args, **kwargs):
-    print('exec patched Page save method')
     self.full_clean()
     self.set_url_path(self.get_parent())
     result = super(Page, self).save(*args, **kwargs)
@@ -27,33 +24,31 @@ class TranslationPageImporter():
 
     def run(self):
         with open(self.json_path) as f:
-            # json_content = json.load(f)
-            json_content = pd.read_json(f)
-            translation_list = self.parse(json_content)
-            self.bulk_import(translation_list)
+            json_content = json.load(f)
+            translations_list = self.parse(json_content)
+            self.bulk_import(translations_list)
 
 
     def parse(self, json_content):
-        translation_list = []
-        for item in json_content.items():
-            field = item[0]
-            values = item[1]
+        translations_dict = {}
+        for field, values in json_content.items():
             for index, value in values.items():
                 translation_index = int(index)
-                translation_json = translation_list[translation_index] if len(translation_list) > translation_index else {}
-                translation_json[field] = value
-                if len(translation_list) > translation_index:
-                    translation_list[translation_index] = translation_json
-                else:
-                    translation_list.append(translation_json)
+                translation_object = translations_dict[translation_index] if translation_index in translations_dict else {}
+                translation_object[field] = value
+                translations_dict[translation_index] = translation_object
 
-        return translation_list
+        translations_list = []
+        for _, value in translations_dict.items():
+            translations_list.append(value)
+
+        return translations_list
 
 
-    def bulk_import(self, translation_list):
+    def bulk_import(self, translations_list):
         translation_index_page = TranslationIndexPage.objects.live()[0]
         created_translations = []
-        for translation_json in translation_list:
+        for translation_json in translations_list:
             parent_translation_id = translation_json['plid']
             parent_translation = self.find_parent(created_translations, translation_index_page, parent_translation_id)
 
@@ -74,9 +69,8 @@ class TranslationPageImporter():
 
     def build_translation(self, translation_json):
         translationpage_type = ContentType.objects.get(app_label='translations', model='TranslationPage')
-        slug = self.generate_slug(translation_json)
+        slug = self.generate_slug(translation_json['title'])
 
-        print(translation_json)
         translation = TranslationPage(
                 id=translation_json['nid'],
                 title=translation_json['title'],
@@ -86,21 +80,24 @@ class TranslationPageImporter():
                 author=translation_json['field_author_value'],
                 translators=translation_json['field_translators_value'],
                 original_link=translation_json['field_original_link_url'],
-                rfatz_id=translation_json['field_rfatz_id_value'],
-                on_vk=self.parse_vk_value(translation_json),
+                rfatz_id=self.parse_rfatz_id(translation_json['field_rfatz_id_value']),
+                on_vk=self.parse_vk_value(translation_json['field_on_vk_value']),
                 readthesequences_link=translation_json['field_readthesequences_link_url'],
                 )
 
         return translation
 
 
-    def parse_vk_value(self, translation_json):
-        return translation_json['field_on_vk_value'] == 1.0
+    def parse_rfatz_id(self, field_rfatz_id_value):
+        if type(field_rfatz_id_value) == int:
+            return rfatz_id
 
 
-    def generate_slug(self, book_json):
-        print(book_json['link_title'])
-        link_title = book_json['link_title']
-        slug = re.sub(r'[:_—,?.!+= ]+', '_', link_title)
+    def parse_vk_value(self, field_on_vk_value):
+        return field_on_vk_value == 1.0
+
+
+    def generate_slug(self, title):
+        slug = re.sub(r'[:«»_—,?.!+=\(\) \\"]+', '_', title)
 
         return slug

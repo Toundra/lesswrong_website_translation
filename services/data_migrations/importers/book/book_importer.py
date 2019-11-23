@@ -9,7 +9,6 @@ from lw.translations.models.translation_page import TranslationPage
 
 
 def patched_save(self, *args, **kwargs):
-    print('exec patched Page save method')
     self.full_clean()
     self.set_url_path(self.get_parent())
     result = super(Page, self).save(*args, **kwargs)
@@ -27,31 +26,30 @@ class BookImporter():
     def run(self):
         with open(self.json_path) as f:
             json_content = json.load(f)
-            book_list = self.parse(json_content)
-            self.bulk_import(book_list)
+            books_list = self.parse(json_content)
+            self.bulk_import(books_list)
 
 
     def parse(self, json_content):
-        book_list = []
-        for item in json_content.items():
-            field = item[0]
-            values = item[1]
+        books_dict = {}
+        for field, values in json_content.items():
             for index, value in values.items():
                 book_index = int(index)
-                book_json = book_list[book_index] if len(book_list) > book_index else {}
-                book_json[field] = value
-                if len(book_list) > book_index:
-                    book_list[book_index] = book_json
-                else:
-                    book_list.append(book_json)
+                book_object = books_dict[book_index] if book_index in books_dict else {}
+                book_object[field] = value
+                books_dict[book_index] = book_object
 
-        return book_list
+        books_list = []
+        for _, value in books_dict.items():
+            books_list.append(value)
+
+        return books_list
 
 
-    def bulk_import(self, book_list):
+    def bulk_import(self, books_list):
         translation_index_page = TranslationIndexPage.objects.live()[0]
         created_books = []
-        for book_json in book_list:
+        for book_json in books_list:
             parent_book_id = book_json['plid']
             parent_book = self.find_parent(created_books, translation_index_page, parent_book_id)
 
@@ -72,7 +70,7 @@ class BookImporter():
 
     def build_book(self, book_json):
         bookpage_type = ContentType.objects.get(app_label='translations', model='BookPage')
-        slug = self.generate_slug(book_json)
+        slug = self.generate_slug(book_json['title'])
 
         book = BookPage(
                 id=book_json['nid'],
@@ -83,17 +81,24 @@ class BookImporter():
                 author=book_json['field_author_value'],
                 translators=book_json['field_translators_value'],
                 original_link=book_json['field_original_link_url'],
-                rfatz_id=book_json['field_rfatz_id_value'],
-                on_vk=book_json['field_on_vk_value'] or False,
+                rfatz_id=self.parse_rfatz_id(book_json['field_rfatz_id_value']),
+                on_vk=self.parse_vk_value(book_json['field_on_vk_value']),
                 readthesequences_link=book_json['field_readthesequences_link_url'],
                 )
 
         return book
 
 
-    def generate_slug(self, book_json):
-        print(book_json)
-        link_title = book_json['link_title']
-        slug = re.sub(r'[:«»_—,?.!+= ]+', '_', link_title)
+    def parse_rfatz_id(self, field_rfatz_id_value):
+        if type(field_rfatz_id_value) == int:
+            return rfatz_id
+
+
+    def parse_vk_value(self, field_on_vk_value):
+        return field_on_vk_value == 1.0
+
+
+    def generate_slug(self, title):
+        slug = re.sub(r'[:«»_—,?.!+= "\\]+', '_', title)
 
         return slug

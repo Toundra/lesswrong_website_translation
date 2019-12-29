@@ -196,3 +196,8 @@ WAGTAIL_SITE_NAME = "LessWrong.ru"
 BASE_URL = 'https://lesswrong.ru'
 
 WAGTAIL_ALLOW_UNICODE_SLUGS = True
+
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'lw.core.drupal_hasher.DrupalPasswordHasher',
+]

@@ -9,6 +9,7 @@ from lw.translations.models.book_page import BookPage
 from lw.translations.models.translation_index_page import TranslationIndexPage
 from services.data_migrations.importers.book.book_importer import BookImporter
 from services.data_migrations.importers.translation_page.translation_page_importer import TranslationPageImporter
+from services.data_migrations.importers.users.users_importer import UsersImporter
 from django.contrib.contenttypes.models import ContentType
 from wagtail.core.models import Page
 
@@ -35,3 +36,6 @@ BookImporter(json_path).run()
 
 json_path = '/work/translations_lw_dump.json'
 TranslationPageImporter(json_path).run()
+
+csv_path = '/work/users.csv'
+UsersImporter(csv_path).run()

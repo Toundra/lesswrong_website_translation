@@ -27,7 +27,8 @@ sql = '''select
 	field_data_field_on_vk.field_on_vk_value,
 	field_revision_field_readthesequences_link.field_readthesequences_link_url,
     node.created,
-    menu_links.plid
+    menu_links.plid,
+    parent_node.nid as parent_node_id
 from
 	node
 	left join field_data_body on field_data_body.entity_id = node.nid
@@ -39,6 +40,9 @@ from
 	left join field_revision_field_readthesequences_link on field_revision_field_readthesequences_link.entity_id = node.nid
     left join book on book.nid = node.nid
     left join menu_links on menu_links.mlid = book.mlid
+    left join menu_links parent_menu_links on menu_links.plid = parent_menu_links.mlid
+    left join book parent_book on parent_book.mlid = parent_menu_links.mlid
+    left join node parent_node on parent_node.nid = parent_book.nid
 where
 	node.type = 'translation';'''
 
@@ -58,7 +62,8 @@ sql = '''select
 	field_data_field_on_vk.field_on_vk_value,
 	field_revision_field_readthesequences_link.field_readthesequences_link_url,
 	node.created,
-    menu_links.plid
+    menu_links.plid,
+    parent_node.nid as parent_node_id
 from
 	node
 	left join field_data_body on field_data_body.entity_id = node.nid
@@ -70,6 +75,9 @@ from
 	left join field_revision_field_readthesequences_link on field_revision_field_readthesequences_link.entity_id = node.nid
     left join book on book.nid = node.nid
     left join menu_links on menu_links.mlid = book.mlid
+    left join menu_links parent_menu_links on menu_links.plid = parent_menu_links.mlid
+    left join book parent_book on parent_book.mlid = parent_menu_links.mlid
+    left join node parent_node on parent_node.nid = parent_book.nid
 where
         node.type = 'book';'''
 

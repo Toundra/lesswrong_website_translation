@@ -50,7 +50,7 @@ class BookImporter():
         translation_index_page = TranslationIndexPage.objects.live()[0]
         created_books = []
         for book_json in books_list:
-            parent_book_id = book_json['plid']
+            parent_book_id = book_json['parent_node_id']
             parent_book = self.find_parent(created_books, translation_index_page, parent_book_id)
 
             book = self.build_book(book_json)

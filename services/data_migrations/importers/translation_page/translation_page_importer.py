@@ -3,6 +3,7 @@ import re
 from django.contrib.contenttypes.models import ContentType
 
 from wagtail.core.models import Page
+from lw.translations.models.book_page import BookPage
 from lw.translations.models.translation_index_page import TranslationIndexPage
 from lw.translations.models.translation_page import TranslationPage
 
@@ -46,11 +47,12 @@ class TranslationPageImporter():
 
 
     def bulk_import(self, translations_list):
+        books = list(BookPage.objects.all())
         translation_index_page = TranslationIndexPage.objects.live()[0]
         created_translations = []
         for translation_json in translations_list:
-            parent_translation_id = translation_json['plid']
-            parent_translation = self.find_parent(created_translations, translation_index_page, parent_translation_id)
+            parent_id = translation_json['parent_node_id']
+            parent_translation = self.find_parent(books, created_translations, translation_index_page, parent_id)
 
             translation = self.build_translation(translation_json)
             parent_translation.add_child(instance=translation)
@@ -59,10 +61,14 @@ class TranslationPageImporter():
             created_translations.append(translation)
 
 
-    def find_parent(self, created_translations, index_page, parent_id):
-        parent_translation = list(filter(lambda x: x.id == parent_id, created_translations))
-        if len(parent_translation) > 0:
-            return parent_translation[0]
+    def find_parent(self, books, created_translations, index_page, parent_id):
+        parent_translations = list(filter(lambda x: x.id == parent_id, created_translations))
+        if len(parent_translations) > 0:
+            return parent_translations[0]
+
+        parent_books = list(filter(lambda x: x.id == parent_id, books))
+        if len(parent_books) > 0:
+            return parent_books[0]
 
         return index_page
 

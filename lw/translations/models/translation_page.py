@@ -8,12 +8,12 @@ from wagtailmedia.edit_handlers import MediaChooserPanel
 
 class TranslationPage(Page):
     body = RichTextField(blank=True)
-    author = models.CharField(max_length=100, blank=True)
-    translators = models.CharField(max_length=100, blank=True)
-    original_link = models.CharField(max_length=100, blank=True)
+    author = models.CharField(max_length=100, blank=True, null=True)
+    translators = models.CharField(max_length=100, blank=True, null=True)
+    original_link = models.CharField(max_length=100, blank=True, null=True)
     rfatz_id = models.PositiveSmallIntegerField(null=True, blank=True)
     on_vk = models.BooleanField(default=False)
-    readthesequences_link = models.CharField(max_length=100, blank=True)
+    readthesequences_link = models.CharField(max_length=100, blank=True, null=True)
 
     audio = models.ForeignKey(
             'wagtailmedia.Media',

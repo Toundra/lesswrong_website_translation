@@ -1,0 +1,7 @@
+django:
+  name: django
+  image: azx9095/lw-django-app
+  version: latest
+  env: production
+  containerPort: 80
+  replicaCount: 1

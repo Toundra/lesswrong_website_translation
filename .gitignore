@@ -6,3 +6,6 @@ db.sqlite3
 /venv
 /env
 lw/media/
+infra/.terraform.d
+*.terraform
+*.ssh

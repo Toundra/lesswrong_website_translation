@@ -1,0 +1,15 @@
+master:
+  resources:
+    limits:
+      memory: 200Mi
+
+replication:
+  enabled: false
+
+rootUser:
+  forcePassword: true
+
+db:
+  name: lw
+  user: lw
+  forcePassword: true

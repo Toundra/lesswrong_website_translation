@@ -12,11 +12,11 @@ services:
 
   app:
     build: .
-    command: bash -c "pip install -r requirements.txt && python manage.py migrate && ./manage.py runserver 0.0.0.0:80"
+    command: bash -c "pip install -r requirements.txt && python manage.py migrate && ./manage.py runserver 0.0.0.0:8080"
     volumes:
     - .:/code
     ports:
-      - "8020:80"
+      - "8020:8080"
     depends_on:
       - db
     environment:
@@ -26,6 +26,7 @@ services:
       DB_USER: 'root'
       DB_PASSWORD: ''
       DB_HOST: db
+      SECRET_KEY: secret_key
 
   infra:
     build:

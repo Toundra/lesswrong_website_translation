@@ -17,5 +17,5 @@ RUN pip install --upgrade pip==20.1.1 \
 
 COPY . /code/
 
-EXPOSE 80
-CMD exec gunicorn lw.core.wsgi:application --bind 0.0.0.0:80 --workers 3
+EXPOSE 8080
+CMD exec gunicorn lw.core.wsgi:application --bind 0.0.0.0:8080 --workers 3

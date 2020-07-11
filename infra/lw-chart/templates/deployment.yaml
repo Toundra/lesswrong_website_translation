@@ -1,24 +1,54 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: django
+  name: django-app
 spec:
   replicas: {{ .Values.django.replicaCount }}
   selector:
     matchLabels:
-      app: django
+      app: django-app
   template:
     metadata:
       labels:
-        app: django
+        app: django-app
     spec:
       imagePullSecrets:
         - name: registry
+
+      volumes:
+        - name: assets-volume
+          emptyDir: {}
+
       containers:
+        - name: nginx
+          image: {{ .Values.nginx.image }}:{{ .Values.nginx.version }}
+          ports:
+            - containerPort: {{ .Values.nginx.containerPort }}
+          volumeMounts:
+            - name: assets-volume
+              mountPath: /static
+
         - name: django
           image: {{ .Values.django.image }}:{{ .Values.django.version }}
           ports:
             - containerPort: {{ .Values.django.containerPort }}
+          volumeMounts:
+            - name: assets-volume
+              mountPath: /code/lw/static
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 10
+            failureThreshold: 3
+
+          startupProbe:
+            timeoutSeconds: 10
+            exec:
+              command:
+                - make
+                - prepare_container
           env:
             - name: DJANGO_SETTINGS_MODULE
               value: 'lw.core.settings.production'
@@ -26,7 +56,7 @@ spec:
               value: 'lw'
             - name: DB_USER
               value: 'lw'
-            - name: DB_HOST   
+            - name: DB_HOST
               value: mariadb-release
             - name: SECRET_KEY
               valueFrom:

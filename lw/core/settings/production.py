@@ -1,7 +1,6 @@
 from .base import *
 
-# FIXME: doesn't work without debug, quick fix
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 

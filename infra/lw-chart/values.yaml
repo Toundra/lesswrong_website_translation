@@ -3,5 +3,12 @@ django:
   image: azx9095/lw-django-app
   version: latest
   env: production
+  containerPort: 8080
+  replicaCount: 1
+
+nginx:
+  name: nginx
+  image: azx9095/nginx
+  version: latest
   containerPort: 80
   replicaCount: 1

@@ -1,6 +1,7 @@
 import json
 import re
 from django.contrib.contenttypes.models import ContentType
+import markdown
 
 from wagtail.core.models import Page
 from lw.translations.models.book_page import BookPage
@@ -77,12 +78,14 @@ class TranslationPageImporter():
         translationpage_type = ContentType.objects.get(app_label='translations', model='TranslationPage')
         slug = self.generate_slug(translation_json['title'])
 
+        html_body = markdown.markdown(translation_json['body_value'], extensions=['md_in_html'])
+
         translation = TranslationPage(
                 id=translation_json['nid'],
                 title=translation_json['title'],
                 slug=slug,
                 content_type=translationpage_type,
-                body=translation_json['body_value'],
+                body=html_body,
                 author=translation_json['field_author_value'],
                 translators=translation_json['field_translators_value'],
                 original_link=translation_json['field_original_link_url'],

@@ -33,11 +33,13 @@ resource "digitalocean_droplet" "lw-infra" {
   region = local.region
   size   = local.size
   ssh_keys   = [digitalocean_ssh_key.lw-infra.fingerprint]
+  monitoring = true
 
   provisioner "remote-exec" {
     inline = [
+      "sleep 10",
       "apt-get -y update && apt-get -y install curl",
-      "curl -sLS https://get.k3s.io | INSTALL_K3S_EXEC='server --tls-san ${self.ipv4_address} --no-deploy traefik' INSTALL_K3S_VERSION=${local.k3s_version} sh -"
+      "curl -sLS https://get.k3s.io | INSTALL_K3S_EXEC='server --tls-san ${self.ipv4_address} --disable metrics-server --disable traefik --disable-cloud-controller' INSTALL_K3S_VERSION=${local.k3s_version} sh -"
     ]
 
     connection {

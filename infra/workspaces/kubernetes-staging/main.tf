@@ -9,24 +9,9 @@ terraform {
   }
 }
 
-locals {
-  environment = "staging"
-}
-
-resource "kubernetes_namespace" "staging" {
-  metadata {
-    labels = {
-      mylabel = local.environment
-    }
-
-    name = local.environment
-  }
-}
-
 resource "kubernetes_secret" "registry-staging" {
   metadata {
     name = "registry"
-    namespace = local.environment
   }
 
   data = {
@@ -39,7 +24,6 @@ resource "kubernetes_secret" "registry-staging" {
 resource "kubernetes_secret" "mariadb-staging" {
   metadata {
     name = "mariadb"
-    namespace = local.environment
   }
 
   data = {
@@ -52,7 +36,6 @@ resource "kubernetes_secret" "mariadb-staging" {
 resource "kubernetes_secret" "django-staging" {
   metadata {
     name = "django"
-    namespace = local.environment
   }
 
   data = {
@@ -67,7 +50,6 @@ resource "helm_release" "mariadb_release" {
   repository = "https://charts.bitnami.com/bitnami/"
   chart      = "mariadb"
   version    = "7.5.1"
-  namespace = local.environment
 
   values = [
     "${file("./values/mariadb.yaml")}"
@@ -83,15 +65,3 @@ resource "helm_release" "mariadb_release" {
     value = var.mariadb_lw_app_password
   }
 }
-
-# resource "helm_release" "prometheus_release" {
-#   name  = "prometheus-release"
-#   repository = "https://kubernetes-charts.storage.googleapis.com"
-#   chart      = "prometheus"
-#   version    = "11.6.0"
-#   namespace = "staging"
-
-#   values = [
-#     "${file("values/prometheus.yaml")}"
-#   ]
-# }

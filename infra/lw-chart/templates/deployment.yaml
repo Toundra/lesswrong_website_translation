@@ -3,7 +3,12 @@ kind: Deployment
 metadata:
   name: django-app
 spec:
-  replicas: {{ .Values.django.replicaCount }}
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels:
       app: django-app
@@ -21,7 +26,7 @@ spec:
 
       containers:
         - name: nginx
-          image: {{ .Values.nginx.image }}:{{ .Values.nginx.version }}
+          image: {{ .Values.nginx.image }}:{{ .Values.version }}
           ports:
             - containerPort: {{ .Values.nginx.containerPort }}
           volumeMounts:
@@ -29,7 +34,7 @@ spec:
               mountPath: /static
 
         - name: django
-          image: {{ .Values.django.image }}:{{ .Values.django.version }}
+          image: {{ .Values.django.image }}:{{ .Values.version }}
           ports:
             - containerPort: {{ .Values.django.containerPort }}
           volumeMounts:
@@ -70,4 +75,6 @@ spec:
                   key: lw_user_password
           resources:
             limits:
-              memory: 300Mi
+              memory: 200Mi
+            requests:
+              memory: 100Mi

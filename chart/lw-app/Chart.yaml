@@ -1,0 +1,13 @@
+apiVersion: v2
+name: lw-chart
+description: lw django app
+
+type: application
+version: 0.0.1
+appVersion: 0.0.1
+
+dependencies:
+  - name: mariadb
+    chart: stable/mariadb
+    version: 7.5.1
+    repository: "https://charts.bitnami.com/bitnami"

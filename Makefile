@@ -33,6 +33,7 @@ update_requirements:
 build_app:
 	docker pull ${DJANGO_REGISTRY_NAME}:latest || true
 	docker build \
+		--target backend \
 		-t ${DJANGO_REGISTRY_NAME}:${VERSION} \
 		-t ${DJANGO_REGISTRY_NAME}:latest \
 		.
@@ -42,19 +43,13 @@ push_app:
 	docker push ${DJANGO_REGISTRY_NAME}:${VERSION}
 
 build_nginx:
-	cd infra/nginx && \
-	( \
-		docker pull ${NGINX_REGISTRY_NAME}:latest || true; \
-		docker build \
-			-t ${NGINX_REGISTRY_NAME}:${VERSION} \
-			-t ${NGINX_REGISTRY_NAME}:latest \
-			. \
-	)
+	docker pull ${NGINX_REGISTRY_NAME}:latest || true
+	docker build \
+		--target static \
+		-t ${NGINX_REGISTRY_NAME}:${VERSION} \
+		-t ${NGINX_REGISTRY_NAME}:latest \
+		.
 
 push_nginx:
 	docker push ${NGINX_REGISTRY_NAME}:latest
 	docker push ${NGINX_REGISTRY_NAME}:${VERSION}
-
-prepare_container:
-	python manage.py collectstatic --noinput
-	python manage.py migrate

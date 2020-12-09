@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.7 as backend
 
 RUN apt-get update -qq  \
  && apt-get install -y --no-install-recommends default-mysql-client=1.0.5 \
@@ -17,5 +17,13 @@ RUN pip install --upgrade pip==20.1.1 \
 
 COPY . /code/
 
+RUN python manage.py collectstatic --noinput
+
 EXPOSE 8080
 CMD exec gunicorn lw.core.wsgi:application --bind 0.0.0.0:8080 --workers 3
+
+
+FROM nginx:1.18.0-alpine as static
+ADD nginx/nginx.conf /etc/nginx/nginx.conf
+COPY --from=backend /code/lw/static /static
+EXPOSE 80

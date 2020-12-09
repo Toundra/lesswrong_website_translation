@@ -10,8 +10,17 @@ services:
       - ./db:/var/lib/mysql
       - ./mysql.conf.d:/etc/mysql/conf.d
 
+  nginx:
+    build:
+      context: .
+      target: static
+    ports:
+      - "80:80"
+
   app:
-    build: .
+    build:
+      context: .
+      target: backend
     command: bash -c "pip install -r requirements.txt && python manage.py migrate && ./manage.py runserver 0.0.0.0:8080"
     volumes:
     - .:/code
@@ -27,11 +36,3 @@ services:
       DB_PASSWORD: ''
       DB_HOST: db
       SECRET_KEY: secret_key
-
-  infra:
-    build:
-      context: ./infra
-      dockerfile: Dockerfile
-    volumes:
-      - ./infra:/infra
-      - ./infra/.terraform.d:/root/.terraform.d/

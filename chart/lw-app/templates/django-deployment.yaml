@@ -17,6 +17,25 @@ spec:
       labels:
         app: {{ .Release.Name }}-django
     spec:
+      initContainers:
+        - name: migrations
+          image: {{ .Values.django.image }}:{{ .Values.django.version }}
+          ports:
+            - containerPort: {{ .Values.django.port }}
+          command: ["python", "manage.py", "migrate"]
+
+          env:
+            - name: DJANGO_SETTINGS_MODULE
+              value: 'lw.core.settings.production'
+            - name: DB_NAME
+              value: {{ .Values.mariadb.db.name }}
+            - name: DB_USER
+              value: {{ .Values.mariadb.db.user }}
+            - name: DB_HOST
+              value: {{ .Release.Name }}-mariadb-headless
+            - name: DB_PASSWORD
+              value: {{ .Values.mariadb.db.password }}
+
       containers:
         - name: nginx
           image: {{ .Values.nginx.image }}:{{ .Values.nginx.version }}

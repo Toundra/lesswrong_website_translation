@@ -7,7 +7,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: {{ .Values.nginx.servicePort }}
+  - port: {{ .Values.nginx.port }}
     targetPort: {{ .Values.nginx.port }}
   selector:
-    app: {{ .Release.Name }}-nginx
+    app: {{ .Release.Name }}-django

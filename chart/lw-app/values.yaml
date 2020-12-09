@@ -1,0 +1,33 @@
+django:
+  image: azx9095/lw-django-app
+  version: latest
+  env: production
+  port: 8080
+  replicas: 1
+
+nginx:
+  image: azx9095/nginx
+  version: latest
+  port: 80
+
+ingress:
+  enabled: false
+
+mariadb:
+  master:
+    resources:
+      limits:
+        memory: 200Mi
+
+  replication:
+    enabled: false
+
+  rootUser:
+    forcePassword: true
+    password: test
+
+  db:
+    name: lw
+    user: lw
+    forcePassword: true
+    password: test

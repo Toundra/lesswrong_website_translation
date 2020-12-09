@@ -1,15 +1,5 @@
 version: '3.4'
 
-x-common:
-  &common
-  volumes:
-    - .:/code
-  environment:
-    DJANGO_SETTINGS_MODULE: 'lw.core.settings.dev'
-    DB_NAME: 'lw'
-    DB_USER: 'root'
-    DB_PASSWORD: ''
-
 services:
   db:
     image: mariadb:10.3
@@ -20,14 +10,29 @@ services:
       - ./db:/var/lib/mysql
       - ./mysql.conf.d:/etc/mysql/conf.d
 
-  app:
-    << : *common
+  nginx:
     build:
       context: .
-      dockerfile: ./Dockerfile
-    command: bash -c "pip install -r requirements.txt && python manage.py migrate && ./manage.py runserver 0.0.0.0:80"
+      target: static
     ports:
-      - "127.0.0.1:8020:80"
+      - "80:80"
+
+  app:
+    build:
+      context: .
+      target: backend
+    command: bash -c "pip install -r requirements.txt && python manage.py migrate && ./manage.py runserver 0.0.0.0:8080"
+    volumes:
+    - .:/code
+    ports:
+      - "8020:8080"
     depends_on:
       - db
-    restart: always
+    environment:
+      DJANGO_ENV: dev
+      DJANGO_SETTINGS_MODULE: 'lw.core.settings.dev'
+      DB_NAME: 'lw'
+      DB_USER: 'root'
+      DB_PASSWORD: ''
+      DB_HOST: db
+      SECRET_KEY: secret_key

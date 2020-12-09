@@ -119,7 +119,7 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME', 'oops'),  # 'oops' is to avoid failure when we start dev_sqlite
         'USER': os.environ.get('DB_USER', 'oops'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'oops'),
-        'HOST': 'db',
+        'HOST': os.environ.get('DB_HOST', 'oops'),
     }
 }
 

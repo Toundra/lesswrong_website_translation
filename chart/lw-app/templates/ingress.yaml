@@ -1,0 +1,24 @@
+{{ if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-ingress
+  annotations:
+{{ toYaml .Values.ingress.annotations | indent 4 }}
+spec:
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Release.Name }}-django
+              servicePort: {{ .Values.django.port }}
+          - path: /static
+            backend:
+              serviceName: {{ .Release.Name }}-nginx
+              servicePort: {{ .Values.nginx.port }}
+  tls:
+  - hosts:
+    - {{ .Values.ingress.host }}
+    secretName: {{ .Values.ingress.host }}
+{{ end }}

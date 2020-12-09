@@ -35,6 +35,8 @@ spec:
               value: {{ .Release.Name }}-mariadb-headless
             - name: DB_PASSWORD
               value: {{ .Values.mariadb.db.password }}
+            - name: SECRET_KEY
+              value: {{ .Values.django.secret_key }}
 
       containers:
         - name: nginx
@@ -66,7 +68,7 @@ spec:
             - name: DB_PASSWORD
               value: {{ .Values.mariadb.db.password }}
             - name: SECRET_KEY
-              value: secret_key
+              value: {{ .Values.django.secret_key }}
 
           resources:
             limits:

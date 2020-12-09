@@ -32,7 +32,7 @@ spec:
             - name: DB_USER
               value: {{ .Values.mariadb.db.user }}
             - name: DB_HOST
-              value: {{ .Release.Name }}-mariadb-headless
+              value: {{ .Release.Name }}-mariadb
             - name: DB_PASSWORD
               value: {{ .Values.mariadb.db.password }}
             - name: SECRET_KEY
@@ -64,7 +64,7 @@ spec:
             - name: DB_USER
               value: {{ .Values.mariadb.db.user }}
             - name: DB_HOST
-              value: {{ .Release.Name }}-mariadb-headless
+              value: {{ .Release.Name }}-mariadb
             - name: DB_PASSWORD
               value: {{ .Values.mariadb.db.password }}
             - name: SECRET_KEY

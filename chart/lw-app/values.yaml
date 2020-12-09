@@ -8,6 +8,7 @@ django:
 nginx:
   image: azx9095/nginx
   version: latest
+  servicePort: 81
   port: 80
 
 ingress:

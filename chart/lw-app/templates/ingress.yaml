@@ -16,7 +16,7 @@ spec:
           - path: /static
             backend:
               serviceName: {{ .Release.Name }}-nginx
-              servicePort: {{ .Values.nginx.port }}
+              servicePort: {{ .Values.nginx.servicePort }}
   tls:
   - hosts:
     - {{ .Values.ingress.host }}

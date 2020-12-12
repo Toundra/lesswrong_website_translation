@@ -20,7 +20,7 @@ s3 = boto3.client('s3',
                   aws_secret_access_key=AWS_SECRET_ACCESS_KEY
                   )
 
-s3.download_file(BUCKET_NAME, OBJECT_NAME, LOCAL_DUMP_NAME)
+s3.download_file(BUCKET_NAME, DUMP_NAME, LOCAL_DUMP_NAME)
 
-restore_dump_cmd = f'mysql {DB_NAME} -h {DB_HOST} -u {DB_USER} -p {DB_PASSWORD} < {LOCAL_DUMP_NAME}'
+restore_dump_cmd = f'mysql -h {DB_HOST} -u {DB_USER} --password={DB_PASSWORD} {DB_NAME} < {LOCAL_DUMP_NAME}'
 os.system(restore_dump_cmd)

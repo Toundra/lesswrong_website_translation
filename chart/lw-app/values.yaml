@@ -5,6 +5,9 @@ django:
   port: 8080
   replicas: 1
 
+restore_dump:
+  enabled: false
+
 nginx:
   image: azx9095/nginx
   version: latest

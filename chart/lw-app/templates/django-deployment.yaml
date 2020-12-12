@@ -31,15 +31,15 @@ spec:
           env:
 {{ if .Values.restore_dump.enabled }}
             - name: AWS_REGION_NAME
-              value: {{ .Values.restore_db.aws.region_name }}
+              value: {{ .Values.restore_dump.aws.region_name }}
             - name: AWS_ACCESS_KEY_ID
-              value: {{ .Values.restore_db.aws.access_key_id }}
+              value: {{ .Values.restore_dump.aws.access_key_id }}
             - name: AWS_SECRET_ACCESS_KEY
-              value: {{ .Values.restore_db.aws.secret_access_key }}
+              value: {{ .Values.restore_dump.aws.secret_access_key }}
             - name: BUCKET_NAME
-              value: {{ .Values.restore_db.bucket_name }}
+              value: {{ .Values.restore_dump.bucket_name }}
             - name: DUMP_NAME
-              value: {{ .Values.restore_db.dump_name }}
+              value: {{ .Values.restore_dump.dump_name }}
 {{ end }}
             - name: DJANGO_SETTINGS_MODULE
               value: 'lw.core.settings.production'

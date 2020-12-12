@@ -23,7 +23,7 @@ spec:
           command: ["python", "manage.py", "migrate"]
 
 {{ if .Values.restore_dump.enabled }}
-        - name: restore_dump
+        - name: restore-dump
           image: {{ .Values.django.image }}:{{ .Values.django.version }}
           command: ["python", "restore_dump.py"]
 {{ end }}

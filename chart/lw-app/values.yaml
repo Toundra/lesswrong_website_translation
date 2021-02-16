@@ -4,6 +4,11 @@ django:
   env: production
   port: 8080
   replicas: 1
+  resources:
+    limits:
+      memory: 400Mi
+    requests:
+      memory: 100Mi
 
 restore_dump:
   enabled: false

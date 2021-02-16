@@ -72,6 +72,6 @@ spec:
 
           resources:
             limits:
-              memory: 200Mi
+              memory: {{ .Values.django.resources.limits.memory }}
             requests:
-              memory: 100Mi
+              memory: {{ .Values.django.resources.requests.memory }}

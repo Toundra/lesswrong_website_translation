@@ -12,8 +12,8 @@ WORKDIR /code/
 
 RUN pip install --upgrade pip==20.1.1 \
   && pip install pip-tools==5.2.1 \
-  && pip-sync \
-  && pip install gunicorn==19.9.0
+  && pip install gunicorn==19.9.0 \
+  && pip-sync requirements.txt
 
 COPY . /code/
 
@@ -21,7 +21,6 @@ RUN python manage.py collectstatic --noinput
 
 EXPOSE 8080
 CMD exec gunicorn lw.core.wsgi:application --bind 0.0.0.0:8080 --workers 3
-
 
 FROM nginx:1.18.0-alpine as static
 ADD nginx/nginx.conf /etc/nginx/nginx.conf

@@ -11,19 +11,11 @@ from . import views
 
 urlpatterns = [
     path('django-admin/', admin.site.urls),
-
     path('admin/', include(wagtailadmin_urls)),
     path('documents/', include(wagtaildocs_urls)),
-
     path('search/', search_views.search, name='search'),
-
-    # path('user/logout/', views.logout_view),
-
     path('', include('allauth.urls')),
-
-    # For anything not caught by a more specific rule above, hand over to
-    # Wagtail's page serving mechanism. This should be the last pattern in
-    # the list:
+    path('', include('lw.translations.urls')),
     path('', include(wagtail_urls)),
 ]
 

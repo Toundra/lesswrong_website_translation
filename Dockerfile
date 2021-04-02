@@ -1,9 +1,9 @@
 FROM python:3.7 as backend
 
-RUN apt-get update -qq  \
- && apt-get install -y --no-install-recommends default-mysql-client=1.0.5 \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -qq \
+  && apt-get install -y postgresql-contrib libpq-dev python3-dev \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 ENV PYTHONUNBUFFERED 1
 

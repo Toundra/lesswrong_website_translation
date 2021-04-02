@@ -26,16 +26,16 @@ Page.save = patched_save
 
 home_page = HomePage.objects.live()[0]
 
-index_page_type = ContentType.objects.get(app_label='translations', model='TranslationIndexPage')
+index_page_type = ContentType.objects.get(app_label='translations', model='translationindexpage')
 index_page = TranslationIndexPage(id=253, intro='', title='Переводы', slug='w', content_type=index_page_type)
 home_page.add_child(instance=index_page)
 index_page.save_revision().publish()
 
-json_path = '/work/books_lw_dump.json'
+json_path = 'books_lw_dump.json'
 BookImporter(json_path).run()
 
-json_path = '/work/translations_lw_dump.json'
+json_path = 'translations_lw_dump.json'
 TranslationPageImporter(json_path).run()
 
-csv_path = '/work/users.csv'
-UsersImporter(csv_path).run()
+# csv_path = 'users.csv'
+# UsersImporter(csv_path).run()

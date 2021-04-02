@@ -43,7 +43,7 @@ class TranslationPage(Page):
     search_fields = Page.search_fields + [
         index.SearchField('title'),
         index.SearchField('body'),
-        index.FilterField('date'),
+        # index.FilterField('date'),
     ]
 
     def get_url_parts(self, *args, **kwargs):

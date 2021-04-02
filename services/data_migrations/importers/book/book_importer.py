@@ -69,7 +69,7 @@ class BookImporter():
 
 
     def build_book(self, book_json):
-        bookpage_type = ContentType.objects.get(app_label='translations', model='BookPage')
+        bookpage_type = ContentType.objects.get(app_label='translations', model='bookpage')
         slug = self.generate_slug(book_json['title'])
 
         book = BookPage(

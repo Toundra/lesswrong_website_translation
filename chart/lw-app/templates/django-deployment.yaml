@@ -86,9 +86,9 @@ spec:
             - name: DJANGO_SETTINGS_MODULE
               value: 'lw.core.settings.production'
             - name: DB_NAME
-              value: {{ .Values.mariadb.db.name }}
+              value: {{ .Release.Namespace}}-postgresql-headless
             - name: DB_USER
-              value: {{ .Values.mariadb.db.user }}
+              value:  {{ .Values.postgresql.postgresqlUsername }}
             - name: DB_HOST
               value: {{ .Release.Name }}-mariadb
             - name: DB_PASSWORD

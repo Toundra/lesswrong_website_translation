@@ -75,7 +75,7 @@ class TranslationPageImporter():
 
 
     def build_translation(self, translation_json):
-        translationpage_type = ContentType.objects.get(app_label='translations', model='TranslationPage')
+        translationpage_type = ContentType.objects.get(app_label='translations', model='translationpage')
         slug = self.generate_slug(translation_json['title'])
 
         html_body = markdown.markdown(translation_json['body_value'], extensions=['md_in_html'])

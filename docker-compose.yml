@@ -2,13 +2,11 @@ version: '3.4'
 
 services:
   db:
-    image: mariadb:10.3
+    image: postgres:13-alpine
     environment:
-      MYSQL_DATABASE: lw
-      MYSQL_ALLOW_EMPTY_PASSWORD: 1
-    volumes:
-      - ./db:/var/lib/mysql
-      - ./mysql.conf.d:/etc/mysql/conf.d
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - 5432:5432
 
   nginx:
     build:
@@ -21,7 +19,7 @@ services:
     build:
       context: .
       target: backend
-    command: bash -c "pip install -r requirements.txt && python manage.py migrate && ./manage.py runserver 0.0.0.0:8080"
+    command: bash -c "pip install -r requirements.txt && python manage.py migrate && python -m pdb manage.py runserver 0.0.0.0:8080"
     volumes:
     - .:/code
     ports:
@@ -32,7 +30,8 @@ services:
       DJANGO_ENV: dev
       DJANGO_SETTINGS_MODULE: 'lw.core.settings.dev'
       DB_NAME: 'lw'
-      DB_USER: 'root'
+      DB_USER: 'postgres'
       DB_PASSWORD: ''
       DB_HOST: db
+      DB_PORT: 5432
       SECRET_KEY: secret_key

@@ -26,13 +26,15 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     'lw.core',
     'lw.home',
-    'lw.search',
     'lw.translations',
 
     'wagtailmedia',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
+    'wagtail.contrib.modeladmin',
+    'wagtail.contrib.postgres_search',
+    'wagtail.contrib.search_promotions',
     'wagtail.embeds',
     'wagtail.sites',
     'wagtail.users',
@@ -42,7 +44,6 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     'wagtail.core',
-    'wagtail.contrib.modeladmin',
     'wagtailmenus',
 
     'modelcluster',
@@ -122,11 +123,12 @@ WSGI_APPLICATION = 'lw.core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('DB_NAME', 'oops'),  # 'oops' is to avoid failure when we start dev_sqlite
         'USER': os.environ.get('DB_USER', 'oops'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'oops'),
         'HOST': os.environ.get('DB_HOST', 'oops'),
+        'PORT': os.environ.get('DB_PORT', 'oops')
     }
 }
 
@@ -228,3 +230,11 @@ ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_VERIFICATION = None
+
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.contrib.postgres_search.backend',
+        'ATOMIC_REBUILD': True,
+        'SEARCH_CONFIG': 'russian',
+    },
+}

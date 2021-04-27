@@ -6,6 +6,9 @@ from wagtail.admin.edit_handlers import FieldPanel
 
 from wagtailmedia.edit_handlers import MediaChooserPanel
 
+from wagtail.search import index
+from django.utils import timezone
+
 class TranslationPage(Page):
     body = RichTextField(blank=True)
     author = models.CharField(max_length=100, blank=True, null=True)
@@ -35,6 +38,12 @@ class TranslationPage(Page):
         FieldPanel('on_vk'),
         FieldPanel('readthesequences_link'),
         MediaChooserPanel('audio'),
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField('title'),
+        index.SearchField('body'),
+        # index.FilterField('date'),
     ]
 
     def get_url_parts(self, *args, **kwargs):

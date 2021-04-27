@@ -4,6 +4,9 @@ from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 
+from wagtail.search import index
+from django.utils import timezone
+
 class BookPage(Page):
     body = RichTextField(blank=True, null=True)
 
@@ -29,6 +32,12 @@ class BookPage(Page):
         FieldPanel('rfatz_id'),
         FieldPanel('on_vk'),
         FieldPanel('readthesequences_link'),
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField('title'),
+        index.SearchField('body'),
+        index.FilterField('date'),
     ]
 
     def get_url_parts(self, *args, **kwargs):

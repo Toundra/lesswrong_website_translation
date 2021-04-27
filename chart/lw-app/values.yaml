@@ -27,21 +27,8 @@ nginx:
 ingress:
   enabled: false
 
-mariadb:
-  master:
-    resources:
-      limits:
-        memory: 200Mi
-
-  replication:
-    enabled: false
-
-  rootUser:
-    forcePassword: true
-    password: test
-
-  db:
-    name: lw
-    user: lw
-    forcePassword: true
-    password: test
+postgresql:
+  local: true
+  postgresqlPassword: qwerty
+  volumePermissions:
+    enabled: true
